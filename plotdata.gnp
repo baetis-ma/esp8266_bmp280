@@ -1,0 +1,18 @@
+#!/usr/bin/gnuplot --persist
+set terminal png font 'Helvetica Bold'
+set output 'esc.png'
+set title "Pressure and Temperature"font ", 15"
+set xlabel "Timestamp" font ", 10"
+set ylabel "Pressure (hPa)" font ", 10"
+set y2label "Temperature (F)" font ", 10"
+set ytics nomirror
+set y2tics nomirror
+stats 'temp.dat' using 3 name "samples" nooutput
+#show variables samples
+#set xtics samples_records/2
+set xtics font ", 8"
+     set xdata time
+     set format x "%m/%d\n%H:%M"
+     set timefmt "%m-%d-%Y %H:%M:%S"
+     plot 'temp.dat' using 1:5 w lines lw 2 axis x1y1,  \
+          ''      using 1:4 w lines lw 2 axis x1y2
