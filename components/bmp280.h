@@ -23,7 +23,7 @@ static void bmp280_getdata () {
        int adcp = 4096 * regdata[0] + 16*regdata[1] + regdata[2]/16;
        int adct = 4096 * regdata[3] + 16*regdata[4] + regdata[5]/16;
        //calculate temperature
-       double var1, var2, ctemp;
+       double var1, var2;
        int tfine;
        var1 = (((double)adct)/16384.0 - ((double)digT1)/1024.0)*((double)digT2);
        var2 = ((((double)adct)/131072.0 - ((double)digT1)/8192.0)*
@@ -31,7 +31,7 @@ static void bmp280_getdata () {
        tfine = (int) var1+var2;
        ctemp = (float) tfine/5120.0;
        //calculate pressure
-       double p, pres;
+       double p;
        var1 = ((double)tfine/2.0) - 64000.0;
        var2 = var1*var1*((double)digP6)/32768.0;
        var2 = var2 + var1*((double)digP5)*2.0;
@@ -44,8 +44,8 @@ static void bmp280_getdata () {
        var2 = p*((double)digP8)/32768.0;
        pres = (p + (var1 + var2 + ((double)digP7))/16.0)/100;
 
-       printf ("temp= %6d  ", (int)(100*(32 + 1.8 * ctemp)));
-       printf ("pres= %8d\n", (int)(100*pres));
+       //printf ("temp= %6d  ", (int)(100*(32 + 1.8 * ctemp)));
+       //printf ("pres= %8d\n", (int)(100*pres));
 
        //construct outstring
        char tmp[100];

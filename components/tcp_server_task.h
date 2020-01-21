@@ -75,7 +75,6 @@ static void tcp_server_task(void *pvParameters)
             close(sock);
         }
         vTaskDelay(10);
-        bmp280_getdata();
     }
 }
 
