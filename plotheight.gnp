@@ -1,0 +1,12 @@
+#!/usr/bin/gnuplot --persist
+set terminal png font 'Helvetica Bold'
+set output 'esc.png'
+set title "Walking to attic, basement, return to desk"font ", 13"
+set xlabel "Timestamp" font ", 10"
+set ylabel "Relative Height (feet)" font ", 10"
+set yrange [-10:25]
+set xtics font ", 8"
+     set xdata time
+     set format x "%m/%d\n%H:%M:%S"
+     set timefmt "%m-%d-%Y %H:%M:%S"
+     plot 'temp.dat'  using 1:((1009.7- $5)*28.4) w lines lw 2 
